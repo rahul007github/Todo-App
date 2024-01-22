@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TODO LIST</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 60px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    a {
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #333;
+        margin-right: 5px;
+        color: DodgerBlu;
+        cursor: pointer;
+    }
+
+    a:hover {
+        background-color: #333;
+        color: #fff;
+    }
+</style>
+<body >
+    <h1>TODO LIST</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.description }} - {% if task.completed %}[X]{% else %}[ ]{% endif %}
+                <a href="{% url 'delete_task' pk=task.pk %}">Delete</a>
+                {% if not task.completed %}
+                    <a href="{% url 'mark_completed' pk=task.pk %}">Mark as Completed</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_task' %}">Add Task</a>
+</body>
+</html>
